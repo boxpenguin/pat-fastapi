@@ -1,0 +1,14 @@
+---
+- host: localhost
+
+  tasks:
+  - name: create docker images
+  command: docker build -t pat-fastapi:latest .
+  args:
+    chdir: /home/ansible/Development/pat-fastapi
+
+  - name: create tag to push image onto dockerhub
+  command: docker tag pat-fastapi:latest boxpenguin/pat-fastapi:latest
+
+  - name: push docker image to dockerhub
+  command: docker push boxpenguin/pat-fastapi:latest
