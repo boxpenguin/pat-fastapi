@@ -1,17 +1,12 @@
 # Dockerimage file to build pat-fastapi
 FROM python:3.10-slim as base
-##WORKDIR /code
-##COPY ./Pipfile* /code/
 COPY ./*.py .
-##RUN pip install pipenv
-##RUN pipenv update
-
+COPY ../ansible/gravity.sh .
 # Setup env
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONFAULTHANDLER 1
-
 
 FROM base AS python-deps
 
@@ -24,12 +19,10 @@ COPY Pipfile .
 COPY Pipfile.lock .
 RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --deploy
 
-
 FROM base AS runtime
 
 # Copy virtual env from python-deps stage
 COPY --from=python-deps /.venv /.venv
 ENV PATH="/.venv/bin:$PATH"
 
-# CMD ["/code/uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
 CMD uvicorn main:app --host 0.0.0.0 --port 8080
