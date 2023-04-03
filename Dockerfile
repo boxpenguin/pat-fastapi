@@ -1,7 +1,8 @@
 # Dockerimage file to build pat-fastapi
 FROM python:3.10-slim as base
 COPY ./*.py .
-COPY ../ansible/gravity.sh .
+COPY /home/ansible/Development/ansible/gravity.sh .
+
 # Setup env
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
