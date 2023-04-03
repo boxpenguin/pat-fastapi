@@ -1,5 +1,6 @@
 # Custom files for testing
 gravity.db
+gravity.sh
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
