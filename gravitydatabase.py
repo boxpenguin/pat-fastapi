@@ -1,4 +1,4 @@
-import sqlite3, pytz, os
+import sqlite3, pytz, os, subprocess
 from datetime import datetime
 
 # This is my first attempt to create a python class this might not work as expected
@@ -21,8 +21,15 @@ class GravityDatabase:
         else:
             print({"Error": "Database not found"})
             exit()
+    def update(self):
+        try:
+            process = subprocess.run(['/etc/.pihole/gravity.sh'], check=True, stdout=subprocess.PIPE, universal_newlines=True)
+            output = process.stdout
+            return output
+        except:
+            pass
 
-    def get_status(self):
+    def status(self):
         return self.results
 
     def toggle(self, is_enabled=True):

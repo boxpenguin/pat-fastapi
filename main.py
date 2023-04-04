@@ -10,19 +10,19 @@ async def root():
 
 @app.get("/enable")
 async def enable_url():
-    test = GravityDatabase(database="../gravity.db", comment="Firebog")
+    test = GravityDatabase(comment="scheduled")
     return {"message": test.toggle(is_enabled=True)}
     # add proper documentation and status codes from 
 
 @app.get("/disable")
 async def disable_url():
-    test = GravityDatabase(database="../gravity.db", comment="Firebog")
+    test = GravityDatabase(comment="scheduled")
     return {"message": test.toggle(is_enabled=False)}
 
-@app.get("/get-status")
-async def get_status():
-    test = GravityDatabase(database="../gravity.db", comment="Firebog")
-    return {"message": test.get_status()}
+@app.get("/status")
+async def status():
+    test = GravityDatabase(comment="scheduled")
+    return {"message": test.status()}
 
 # we can have the api perform a python code thing and then do some server side code and reply as a json
 
