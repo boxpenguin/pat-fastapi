@@ -1,18 +1,18 @@
 ---
 - hosts: pihole
 
-tasks:
-- name: stop existing containers
-  command: docker stop pat-fastapi-app
-  ignore_errors: yes
+  tasks:
+  - name: stop existing containers
+    command: docker stop pat-fastapi-app
+    ignore_errors: yes
 
-- name: remove the containers
-  command: docker rm pat-fastapi-app
-  ignore_errors: yes
+  - name: remove the containers
+    command: docker rm pat-fastapi-app
+    ignore_errors: yes
 
-- name: remove image
-  command: docker rmi boxpenguin/pat-fastapi:latest
-  ignore_errors: yes
+  - name: remove image
+    command: docker rmi boxpenguin/pat-fastapi:latest
+    ignore_errors: yes
 
-- name: create containers
-  command: docker run -d --name pat-fastapi-app -p 8080:8080 -v /etc/pihole/gravity.db:/etc/pihole/gravity.db boxpenguin/pat-fastapi:latest
+  - name: create containers
+    command: docker run -d --name pat-fastapi-app -p 8080:8080 -v /etc/pihole/gravity.db:/etc/pihole/gravity.db boxpenguin/pat-fastapi:latest
