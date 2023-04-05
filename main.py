@@ -8,6 +8,11 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World"}
 
+@app.get("/update")
+async def update_url():
+    test = GravityDatabase(comment="scheduled")
+    return {"message": test.update()}
+
 @app.get("/enable")
 async def enable_url():
     test = GravityDatabase(comment="scheduled")
