@@ -12,7 +12,7 @@ async def root():
 def update_url():
     test = GravityDatabase(comment="scheduled")
     output = test.update()
-    return {"message": output}
+    return output
 
 @app.get("/enable")
 async def enable_url():
