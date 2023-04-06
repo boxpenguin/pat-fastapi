@@ -9,9 +9,9 @@ async def root():
     return {"message": "Hello World"}
 
 @app.get("/update")
-async def update_url():
+def update_url():
     test = GravityDatabase(comment="scheduled")
-    output = await test.update()
+    output = test.update()
     return {"message": output}
 
 @app.get("/enable")
