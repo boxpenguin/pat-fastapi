@@ -22,12 +22,9 @@ class GravityDatabase:
             print({"Error": "Database not found"})
             exit()
     def update(self):
-        try:
-            process = subprocess.run(['/etc/.pihole/gravity.sh'], check=True, stdout=subprocess.PIPE, universal_newlines=True)
-            output = process.stdout
-            return output
-        except:
-            pass
+        process = subprocess.run(['/etc/.pihole/gravity.sh'], check=True, stdout=subprocess.PIPE, universal_newlines=True)
+        output = process.stdout
+        return output
 
     def status(self):
         return self.results
