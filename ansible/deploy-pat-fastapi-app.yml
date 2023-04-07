@@ -15,4 +15,5 @@
     ignore_errors: yes
 
   - name: create containers
-    command: docker run -d --name pat-fastapi-app -p 8080:8080 -v /etc/pihole/gravity.db:/etc/pihole/gravity.db boxpenguin/pat-fastapi:latest
+    # command: docker run -d --name pat-fastapi-app -p 8080:8080 -v /etc/pihole/gravity.db:/etc/pihole/gravity.db boxpenguin/pat-fastapi:latest
+    command: docker run --name pat-fastapi-app -p 8080:8080 -v /etc/pihole/:/etc/pihole/ -v /etc/.pihole/:/etc/.pihole/ -v /opt/pihole:/opt/pihole boxpenguin/pat-fastapi
