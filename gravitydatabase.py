@@ -13,7 +13,7 @@ class GravityDatabase:
             # fetchall() will return a list of tuple which we will need to merge into a list
             fetch_tuple = self.res.fetchall()
             self.results = list(map(list,fetch_tuple))
-            # add date_modified from database into human readable timedata
+            # Add a section to detect the sqlite3 timezone
             for item in self.results:
                 date_modified_epoch = item[2]
                 datetime_obj = datetime.fromtimestamp(date_modified_epoch)

@@ -1,8 +1,12 @@
 # Dockerimage file to build pat-fastapi
 FROM python:3.10-slim as base
+
+RUN mkdir /etc/.pihole/
+WORKDIR /etc/.pihole
+COPY ./gravity.sh .
+
+WORKDIR /
 COPY ./*.py .
-RUN mkdir /etc/.pihole/ 
-COPY ./gravity.sh /etc/.pihole/gravity.sh
 
 # Setup env
 ENV LANG C.UTF-8
