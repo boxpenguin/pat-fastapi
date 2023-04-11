@@ -1,5 +1,5 @@
 # main.py
-from fastapi import FastAPI, Path
+from fastapi import FastAPI
 from gravitydatabase import GravityDatabase
 
 app = FastAPI()
@@ -26,7 +26,7 @@ async def enable_url():
 #     return {"message": test.toggle(is_enabled=False)}
 
 @app.get("/disable/{adlist_comment}")
-async def disable_url(adlist_comment: str = Path(None, description="The adlist comment you wish to access.")):
+async def disable_url(adlist_comment: str):
     test = GravityDatabase(comment=adlist_comment)
     return {"message": test.toggle(is_enabled=False)}
 
