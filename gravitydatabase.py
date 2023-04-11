@@ -3,7 +3,7 @@ from datetime import datetime
 
 # This is my first attempt to create a python class this might not work as expected
 class GravityDatabase:
-    def __init__(self, database="/etc/pihole/gravity.db", comment="pam-enabled"):
+    def __init__(self, database="/etc/pihole/gravity.db", comment="pat-enabled"):
         if os.path.isfile(database):
             self.comment = comment
             self.database = database
@@ -13,7 +13,6 @@ class GravityDatabase:
             # fetchall() will return a list of tuple which we will need to merge into a list
             fetch_tuple = self.res.fetchall()
             self.results = list(map(list,fetch_tuple))
-            # Add a section to detect the sqlite3 timezone
             for item in self.results:
                 date_modified_epoch = item[2]
                 datetime_obj = datetime.fromtimestamp(date_modified_epoch)

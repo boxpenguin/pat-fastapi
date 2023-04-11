@@ -1,5 +1,5 @@
 # main.py
-from fastapi import FastAPI
+from fastapi import FastAPI, Path
 from gravitydatabase import GravityDatabase
 
 app = FastAPI()
@@ -20,9 +20,14 @@ async def enable_url():
     return {"message": test.toggle(is_enabled=True)}
     # add proper documentation and status codes from 
 
-@app.get("/disable")
-async def disable_url():
-    test = GravityDatabase(comment="scheduled")
+# @app.get("/disable")
+# async def disable_url():
+#     test = GravityDatabase(comment="scheduled")
+#     return {"message": test.toggle(is_enabled=False)}
+
+@app.get("/disable/{adlist_comment}")
+async def disable_url(adlist_comment: str = Path("scheduled", description="The adlist comment you wish to access.")):
+    test = GravityDatabase(comment=adlist_comment)
     return {"message": test.toggle(is_enabled=False)}
 
 @app.get("/status")
@@ -30,6 +35,7 @@ async def status():
     test = GravityDatabase(comment="scheduled")
     return {"message": test.status()}
 
+# http://ip/disable/scheduled
 # we can have the api perform a python code thing and then do some server side code and reply as a json
 
 """
