@@ -1,8 +1,15 @@
 # main.py
 from fastapi import FastAPI
 from gravitydatabase import GravityDatabase
+from pydantic import BaseModel, HttpUrl
 
 app = FastAPI()
+
+class Status(BaseModel):
+    address: HttpUrl
+    status: bool
+    updated: str
+
 
 @app.get("/")
 async def root():
@@ -10,32 +17,26 @@ async def root():
 
 @app.get("/update")
 def update_url():
-    test = GravityDatabase(comment="scheduled")
+    test = GravityDatabase()
     output = test.update()
     return output
 
-@app.get("/enable")
-async def enable_url():
-    test = GravityDatabase(comment="scheduled")
+@app.get("/enable/{adlist_comment}")
+async def enable_url(adlist_comment: str):
+    test = GravityDatabase(comment=adlist_comment)
     return {"message": test.toggle(is_enabled=True)}
     # add proper documentation and status codes from 
-
-# @app.get("/disable")
-# async def disable_url():
-#     test = GravityDatabase(comment="scheduled")
-#     return {"message": test.toggle(is_enabled=False)}
 
 @app.get("/disable/{adlist_comment}")
 async def disable_url(adlist_comment: str):
     test = GravityDatabase(comment=adlist_comment)
     return {"message": test.toggle(is_enabled=False)}
 
-@app.get("/status")
-async def status():
-    test = GravityDatabase(comment="scheduled")
+@app.get("/status/{adlist_comment}")
+async def status(adlist_comment: str):
+    test = GravityDatabase(comment=adlist_comment)
     return {"message": test.status()}
 
-# http://ip/disable/scheduled
 # we can have the api perform a python code thing and then do some server side code and reply as a json
 
 """

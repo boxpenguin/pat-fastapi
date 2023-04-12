@@ -12,11 +12,17 @@ class GravityDatabase:
             self.res = self.cur.execute(f"SELECT address, enabled, date_modified FROM adlist WHERE comment='{self.comment}'")
             # fetchall() will return a list of tuple which we will need to merge into a list
             fetch_tuple = self.res.fetchall()
-            self.results = list(map(list,fetch_tuple))
-            for item in self.results:
+            self.raw_list = list(map(list,fetch_tuple))
+            for item in self.raw_list:
                 date_modified_epoch = item[2]
                 datetime_obj = datetime.fromtimestamp(date_modified_epoch)
                 item[2] = f"{datetime_obj:%Y/%m/%d %H:%M:%S}"
+            my_counter = 0
+            adlist = {"adlist0": {"address": "", "enabled": "", "date_modified": ""}}
+            for each in self.raw_list:
+                adlist[f"adlist{my_counter}"] = {"address": each[0], "enabled": each[1], "date_modified": each[2]}
+                my_counter += 1
+            self.results = adlist 
         else:
             print({"Error": "Database not found"})
             exit()
