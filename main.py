@@ -14,7 +14,7 @@ async def root():
 def update_url():
     test = GravityDatabase()
     output = test.update()
-    return json.dumps({"console output": output.split("/n")})
+    return json.dumps({"console output": output.split("\n")})
 
 @app.get("/enable/{adlist_comment}")
 async def enable_url(adlist_comment: str):
