@@ -18,7 +18,7 @@ async def root():
 def update_url():
     test = GravityDatabase()
     output = test.update()
-    return output.replace("\u001b[K", "")
+    return output
 
 @app.get("/pat-fastapi/enable/{adlist_comment}")
 async def enable_url(adlist_comment: str):

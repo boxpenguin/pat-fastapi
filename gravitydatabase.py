@@ -27,7 +27,7 @@ class GravityDatabase:
 
     def update(self):
         process = subprocess.run(['/etc/.pihole/gravity.sh'], check=True, stdout=subprocess.PIPE, universal_newlines=True)
-        output = process.stdout
+        output = process.stdout.replace("\u001b[K", "")
         return output
 
     def status(self):
