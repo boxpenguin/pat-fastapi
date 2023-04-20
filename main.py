@@ -35,3 +35,16 @@ async def disable_url(adlist_comment: str):
 async def status(adlist_comment: str):
     test = GravityDatabase(comment=adlist_comment)
     return {"message": test.status()}
+
+#broken code????
+from fastapi import APIRouter
+from my_class import PiholeGravity
+
+router = APIRouter()
+
+# create an instance of the PiholeGravity class
+pihole_gravity = PiholeGravity()
+
+@router.get("/run-gravity-script")
+async def run_gravity_script():
+    return await pihole_gravity.run_gravity_script()
