@@ -2,7 +2,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import PlainTextResponse
 from gravitydatabase import GravityDatabase
-from app_stdout import app_stdout_router
+from import_asyncio_htmlout import stdout_router
 
 app = FastAPI()
 
@@ -36,4 +36,4 @@ async def status(adlist_comment: str):
     test = GravityDatabase(comment=adlist_comment)
     return {"message": test.status()}
 
-app.include_router(app_stdout_router, prefix='/stdout')
+app.include_router(stdout_router, prefix='/stdout')

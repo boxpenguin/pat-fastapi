@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse, PlainTextResponse
 from fastapi import APIRouter
 
-router = APIRouter()
+stdout_router = APIRouter()
 
 class AsyncSubprocessReader:
     def __init__(self, cmd):
@@ -25,7 +25,7 @@ class AsyncSubprocessReader:
         self.process.terminate()
         await self.process.communicate()
 
-@router.get("/")
+@stdout_router.get("/")
 async def index():
     return HTMLResponse("""
         <html>
@@ -51,7 +51,7 @@ async def index():
         </html>
     """)
 
-@router.get("/output", response_class=PlainTextResponse)
+@stdout_router.get("/output", response_class=PlainTextResponse)
 async def output():
     reader = AsyncSubprocessReader("echo 'hello world'; sleep 1; echo 'goodbye world'")
     async for line in reader.read_subprocess_output():
