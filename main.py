@@ -3,7 +3,6 @@ from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse
 from gravitydatabase import GravityDatabase
 from pydantic import BaseModel, HttpUrl
-import json
 
 app = FastAPI()
 
@@ -15,7 +14,7 @@ async def root():
 def update_url():
     test = GravityDatabase()
     output = test.update()
-    return json.dumps({"console output": output.split("\\n")})
+    return output
 
 @app.get("/enable/{adlist_comment}")
 async def enable_url(adlist_comment: str):
