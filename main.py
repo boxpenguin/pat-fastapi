@@ -2,7 +2,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import PlainTextResponse
 from gravitydatabase import GravityDatabase
-from pydantic import BaseModel, HttpUrl
+from app_stdout import app_stdout_router
 
 app = FastAPI()
 
@@ -36,15 +36,4 @@ async def status(adlist_comment: str):
     test = GravityDatabase(comment=adlist_comment)
     return {"message": test.status()}
 
-#broken code????
-from fastapi import APIRouter
-from import_asyncio import PiholeGravity
-
-router = APIRouter()
-
-# create an instance of the PiholeGravity class
-pihole_gravity = PiholeGravity()
-
-@router.get("/run-gravity-script")
-async def run_gravity_script():
-    return await pihole_gravity.run_gravity_script()
+app.include_router(app_stdout_router, prefix='/stdout')
