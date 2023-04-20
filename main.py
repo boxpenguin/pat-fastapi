@@ -14,7 +14,7 @@ async def root():
 def update_url():
     test = GravityDatabase()
     output = test.update()
-    return output
+    return output.replace("\u001b[K", "")
     # return f"{output}"
 
 @app.get("/enable/{adlist_comment}")
