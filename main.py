@@ -38,7 +38,7 @@ async def status(adlist_comment: str):
 
 #broken code????
 from fastapi import APIRouter
-from my_class import PiholeGravity
+from import_asyncio import PiholeGravity
 
 router = APIRouter()
 
