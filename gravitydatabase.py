@@ -21,8 +21,6 @@ class GravityDatabase:
             for each in self.raw_list:
                 adlist[f"adlist{my_counter}"] = {"address": each[0], "enabled": each[1], "date_modified": each[2]}
                 my_counter += 1
-            if my_counter == 0:
-                return None
             self.results = adlist 
         except sqlite3.Error as e:
             raise ValueError(f"Error connecting to database: {e}")

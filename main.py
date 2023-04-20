@@ -1,6 +1,6 @@
 # main.py
-from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import PlainTextResponse, RedirectResponse
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import PlainTextResponse
 from gravitydatabase import GravityDatabase
 from pydantic import BaseModel, HttpUrl
 
@@ -24,6 +24,7 @@ def update_url():
 async def enable_url(adlist_comment: str):
     test = GravityDatabase(comment=adlist_comment)
     return {"message": test.enable_adlist()}
+    # add proper documentation and status codes from 
 
 @app.get("/pat-fastapi/disable/{adlist_comment}")
 async def disable_url(adlist_comment: str):
@@ -33,7 +34,4 @@ async def disable_url(adlist_comment: str):
 @app.get("/pat-fastapi/status/{adlist_comment}")
 async def status(adlist_comment: str):
     test = GravityDatabase(comment=adlist_comment)
-    result = test.status()
-    if result is None:
-        raise HTTPException(status_code=404, detail=f"Adlist with comment '{comment}' not found.")
-    return {"message": result}
+    return {"message": test.status()}
