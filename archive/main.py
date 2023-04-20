@@ -2,6 +2,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import PlainTextResponse
 from gravitydatabase import GravityDatabase
+from import_asyncio_htmlout import stdout_router
 
 app = FastAPI()
 
@@ -16,7 +17,8 @@ async def root():
 @app.get("/pat-fastapi/update", response_class=PlainTextResponse)
 def update_url():
     test = GravityDatabase()
-    return test.update()
+    output = test.update()
+    return output
 
 @app.get("/pat-fastapi/enable/{adlist_comment}")
 async def enable_url(adlist_comment: str):
@@ -33,3 +35,5 @@ async def disable_url(adlist_comment: str):
 async def status(adlist_comment: str):
     test = GravityDatabase(comment=adlist_comment)
     return {"message": test.status()}
+
+app.include_router(stdout_router, prefix='/stdout')

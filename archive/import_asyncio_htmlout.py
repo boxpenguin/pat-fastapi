@@ -53,7 +53,7 @@ async def index():
 
 @stdout_router.get("/output", response_class=PlainTextResponse)
 async def output():
-    reader = AsyncSubprocessReader("echo 'hello world'; sleep 1; echo 'goodbye world'")
+    reader = AsyncSubprocessReader("/etc/.pihole/gravity.sh")
     async for line in reader.read_subprocess_output():
         yield line + "\n"
     await reader.stop_subprocess()

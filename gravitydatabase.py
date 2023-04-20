@@ -1,6 +1,5 @@
-import sqlite3, pytz, os, subprocess
+import sqlite3, os, subprocess
 from datetime import datetime
-import asyncio
 
 class GravityDatabase:
     def __init__(self, db_path: str ="/etc/pihole/gravity.db", comment: str ="pat-enabled"):
