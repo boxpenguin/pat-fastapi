@@ -10,7 +10,7 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World"}
 
-@app.get("/update", response_class=PlainTextResponse)
+@app.get("/update")#, response_class=PlainTextResponse)
 def update_url():
     test = GravityDatabase()
     output = test.update()
