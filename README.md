@@ -1,8 +1,18 @@
 # pat-fastapi
 pihole-adlist-toggler with fastapi 
 
+# What is this?
+I will be developing a FastAPI to control my adlists on my piholes. This will allow me to now have to access the pihole gravity database functions without needing to login to two different admin panels.
+
 # WELCOME TO ME LEARNING FastAPI!
 If you pulled this version of the code I am very sorry that its garbage
+
+## Resources in no particular order
+> Developing a single paffe app with FastAPI and React
+
+* [FastAPI Docs](https://fastapi.tiangolo.com/)
+* [Possible help with the front end](https://testdriven.io/blog/fastapi-react/)
+* 
 
 # Notes for jordan
 ## pipenv and pipfiles
@@ -44,3 +54,69 @@ I have it running on both my PiHole installations and able to easily enable and 
 * Frontend development
 * automatic running of uvicorn
 * intergration with crontab "adlist toggler"
+* look into routers for code seperation if needed
+    * Possible way to add more functions
+* I did find a neat way to start parsing the output as a json which could complicate the async or make it easier?
+
+## Uvicorn as a service
+Installing uvicorn as a service and setup logging. 
+
+``` makefile
+# /etc/systemd/system/pat-fastapi.service
+[Unit]
+Description=My FastAPI Service
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/home/jordan/Development/pat-fastapi/
+ExecStart=/home/jordan/.local/share/virtualenvs/pat-fastapi-5QG9oBxx/bin/uvicorn main:app --host 0.0.0.0 --port 8000 --log-config /home/jordan/Development/pat-fastapi/logging.conf
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Installing the servive.
+
+`sudo systemctl daemon-reload`
+
+`sudo systemctl start pat-fastapi.service`
+
+`sudo systemctl enable pat-fastapi.service`
+
+Creating a logging configuration file for uvicorn to accept. This will log into `/var/log/pat-fastapi.log`
+
+``` makefile
+# pat-fastapi/logging.conf
+[loggers]
+keys=root
+
+[handlers]
+keys=consoleHandler,fileHandler
+
+[formatters]
+keys=genericFormatter
+
+[logger_root]
+level=DEBUG
+handlers=consoleHandler,fileHandler
+
+[handler_consoleHandler]
+class=StreamHandler
+level=DEBUG
+formatter=genericFormatter
+args=(sys.stdout,)
+
+[handler_fileHandler]
+class=logging.handlers.RotatingFileHandler
+level=DEBUG
+formatter=genericFormatter
+args=('/var/log/pat-fastapi.log', 'a', 10485760, 5)
+
+[formatter_genericFormatter]
+format=%(asctime)s [%(levelname)s] %(pathname)s:%(lineno)d - %(message)s
+datefmt=%Y-%m-%d %H:%M:%S
+```
+
+`touch /var/log/pat-fastapi.log`
