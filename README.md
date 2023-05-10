@@ -77,7 +77,7 @@ Restart=on-failure
 WantedBy=multi-user.target
 ```
 
-Installing the servive.
+Installing the service.
 
 `sudo systemctl daemon-reload`
 
