@@ -52,11 +52,12 @@ I have it running on both my PiHole installations and able to easily enable and 
 
 # TODO
 * Frontend development
-* automatic running of uvicorn
-* intergration with crontab "adlist toggler"
 * look into routers for code seperation if needed
     * Possible way to add more functions
-* I did find a neat way to start parsing the output as a json which could complicate the async or make it easier?
+
+# Installation as a Python Application
+## Installation Script
+
 
 ## Uvicorn as a service
 Installing uvicorn as a service and setup logging. 
