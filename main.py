@@ -5,9 +5,9 @@ from gravitydatabase import GravityDatabase
 
 app = FastAPI()
 
-@app.get("/")
+@app.get("/", response_class=RedirectResponse)
 async def root():
-    return RedirectResponse("/pat-fastapi/")
+    return "/pat-fastapi/"
 
 @app.get("/pat-fastapi/")
 async def root():
