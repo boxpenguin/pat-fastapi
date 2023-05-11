@@ -8,11 +8,11 @@ I will be developing a FastAPI to control my adlists on my piholes. This will al
 If you pulled this version of the code I am very sorry that its garbage
 
 ## Resources in no particular order
-> Developing a single paffe app with FastAPI and React
+> Developing a single page app with FastAPI and React
 
 * [FastAPI Docs](https://fastapi.tiangolo.com/)
 * [Possible help with the front end](https://testdriven.io/blog/fastapi-react/)
-* 
+
 
 # Notes for jordan
 ## pipenv and pipfiles
