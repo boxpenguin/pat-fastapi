@@ -4,7 +4,7 @@
 # ignore cross OS distro differences with a simple "detect debian/systemd only"
 # Copy  pat-fastapi.service to /etc/systemd/system/
 
-cd /opt/pat-fastapi
+python3 -m venv .
 
 cp ./pat-fastapi.service /etc/systemd/system/
 chown root:root /etc/systemd/system/pat-fastapi.service
