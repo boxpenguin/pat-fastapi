@@ -1,6 +1,6 @@
 # main.py
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import PlainTextResponse
+from fastapi.responses import PlainTextResponse, RedirectResponse
 from gravitydatabase import GravityDatabase
 
 app = FastAPI()
